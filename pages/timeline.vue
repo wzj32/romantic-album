@@ -39,37 +39,37 @@ const events = [
     date: '2024.01.15',
     title: '初次相遇',
     description: '在那个冬日的午后，命运让我们相遇。从第一眼起，你就成了我心中最特别的存在。',
-    image: 'https://images.unsplash.com/photo-1543430720-fa600c67e423?auto=format&fit=crop&w=500&q=80',
+    image: '/photos/FE3A38DC555AC81FF9217153E6AF4170.jpg',
   },
   {
     date: '2024.02.14',
     title: '第一次约会',
     description: '情人节那天，我们一起走过那条长长的街道。你的笑容比任何花束都要美。',
-    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=500&q=80',
+    image: '/photos/C234806E8AA47D12588B6F3209B5CBEC.jpg',
   },
   {
     date: '2024.04.01',
     title: '一起看樱花',
     description: '春天来了，我们并肩站在樱花树下。花瓣落在你的发间，那一刻我觉得整个世界都在微笑。',
-    image: 'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=500&q=80',
+    image: '/photos/5843368A5FAB5119EF6702A1158089FA_0.jpg',
   },
   {
     date: '2024.06.20',
     title: '夏日旅行',
     description: '我们一起去了海边。你站在夕阳下，海风吹起你的头发，那画面我永远都忘不了。',
-    image: 'https://images.unsplash.com/photo-1506744626753-1fa7673e022b?auto=format&fit=crop&w=500&q=80',
+    image: '/photos/76EB6224B67983026B54FF27A53659FE.jpg',
   },
   {
     date: '2024.09.10',
     title: '你的生日',
     description: '为你准备了一整天的惊喜。看到你开心的样子，我觉得所有的努力都值得。',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80',
+    image: '/photos/FDB049E652287FC45BE90F2000894B46.jpg',
   },
   {
     date: '2024.12.25',
     title: '圣诞节的约定',
     description: '在飘雪的夜晚，我们许下了一个约定——无论未来如何，都要一直在一起。',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80',
+    image: '/photos/361376B5A660CEDE2C5142410D19F39C.jpg',
   },
 ]
 

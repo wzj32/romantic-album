@@ -55,10 +55,10 @@
 const titleChars = 'For My Only One'.split('')
 
 const previewPhotos = [
-  { src: 'https://images.unsplash.com/photo-1543430720-fa600c67e423?auto=format&fit=crop&w=600&q=80', caption: '初遇的惊艳' },
-  { src: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=600&q=80', caption: '你的笑靥' },
-  { src: 'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?auto=format&fit=crop&w=600&q=80', caption: '眼里的星光' },
-  { src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80', caption: '温柔的侧脸' },
+  { src: '/photos/5843368A5FAB5119EF6702A1158089FA_0.jpg', caption: '和春天一样美好' },
+  { src: '/photos/91AE58D9263CDD181D57F20A99C41AB5.jpg', caption: '温柔的比耶少女' },
+  { src: '/photos/C597F6CE1AA1BC235EEA118C95129D78.jpg', caption: '甜甜双马尾' },
+  { src: '/photos/361376B5A660CEDE2C5142410D19F39C.jpg', caption: '夜色温柔如你' },
 ]
 
 function particleStyle(i) {
