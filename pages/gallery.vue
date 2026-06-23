@@ -60,7 +60,7 @@ const photos = [
   { src: '/photos/19EFE660296BA7E242B037B6A3672F96.jpg', caption: '蓝色是你的专属色' },
   { src: '/photos/045D8821D0009DD293408EA2F93EDA9A.jpg', caption: '慵懒的午后时光' },
   { src: '/photos/89E536639D59E3C6ED86A5905DE2AC66.jpg', caption: '嘟嘟嘴的小可爱' },
-  { src: '/photos/415BDB8D9D54746F12FD8E9FA8C1176D.jpg', caption: '鬼马少女本色' },
+  { src: '/photos/415BDB8D9D54746F12FD8E9FA8C1176D.jpg', caption: '少女本色' },
   { src: '/photos/60FF6415C597D855EE2F68C13C867BC8.jpg', caption: '戴口罩也遮不住的美' },
   { src: '/photos/C29AF36785223C143F9B5FB0346DDCFD.jpg', caption: '素颜也倾城' },
   { src: '/photos/EA69617A47ABE560D0F400F5F3714915.jpg', caption: '短发干练又温柔' },
@@ -69,7 +69,7 @@ const photos = [
   { src: '/photos/6A0AE5A770DB85850CF5180588F85C98.jpg', caption: '安静时最迷人' },
   { src: '/photos/237101A1CBF604DCFECF288A149D2650.jpg', caption: '穿卫衣的日常也好看' },
   { src: '/photos/FC78E84F9A64A2A35D7D2A4BFB9F4696.jpg', caption: '新年快乐，我的小猫咪' },
-  { src: '/photos/A2884B8105991D11A5D39862E247C037.jpg', caption: '慵懒也是一种美' },
+  { src: '/photos/A2884B8105991D11A5D39862E247C037.jpg', caption: '好看' },
   { src: '/photos/E02128A8996E7FF1AE182AD7FDADB623.jpg', caption: '微微泛红的脸颊' },
   { src: '/photos/0A7C5978E24BA4BB55EE84AFAE765413.jpg', caption: '闭上眼感受世界' },
   { src: '/photos/89D72D2E24D6CE3AE5B334FA85373CA0.jpg', caption: '漫画少女既视感' },
@@ -86,6 +86,11 @@ const photos = [
   { src: '/photos/EE087DF0AF138FBD5CF2F3BD49E36CB4_0.jpg', caption: '偷偷喝奶茶的幸福' },
   { src: '/photos/2914CAEBF1739DCC28B6323821DC9538.jpg', caption: '微笑的弧度刚刚好' },
   { src: '/photos/03BD6F8E46F124DE06E5577DA6CB50B0.jpg', caption: '冬日里的温暖' },
+  { src: '/photos/2026-06-23_15-14-29_979.jpg', caption: '' },
+  { src: '/photos/2026-06-23_15-14-29_987.jpg', caption: '' },
+  { src: '/photos/2026-06-23_15-14-30_013.jpg', caption: '' },
+  { src: '/photos/2026-06-23_15-14-30_027.jpg', caption: '' },
+  { src: '/photos/2026-06-23_15-14-30_037.jpg', caption: '' },
 ]
 
 const lightboxOpen = ref(false)

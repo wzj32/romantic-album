@@ -1,109 +1,105 @@
 <template>
-  <div class="timeline-page">
+  <div class="moments-page">
     <header class="page-header">
-      <h1 class="page-title">我们的时光轴</h1>
-      <p class="page-desc">那些闪闪发光的日子</p>
+      <h1 class="page-title">心动瞬间</h1>
+      <p class="page-desc">那些让我心跳加速的时刻</p>
     </header>
 
-    <div class="timeline">
-      <div class="timeline-line"></div>
+    <p class="cards-hint">点击卡片，翻开心动</p>
+
+    <div class="cards-grid">
       <div
-        class="timeline-item"
-        v-for="(item, index) in events"
+        v-for="(moment, index) in moments"
         :key="index"
-        :class="[index % 2 === 0 ? 'left' : 'right', { visible: visibleItems.has(index) }]"
+        class="card-wrapper"
+        :class="{ flipped: flippedCards.has(index), visible: visibleCards.has(index) }"
         :data-index="index"
+        :style="{ transitionDelay: `${index * 0.06}s` }"
+        @click="flipCard(index)"
       >
-        <div class="timeline-dot">
-          <span class="dot-inner"></span>
-        </div>
-        <div class="timeline-card">
-          <div class="card-date">{{ item.date }}</div>
-          <h3 class="card-title">{{ item.title }}</h3>
-          <p class="card-desc">{{ item.description }}</p>
-          <img v-if="item.image" :src="item.image" :alt="item.title" class="card-image" loading="lazy" />
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="front-number">{{ String(index + 1).padStart(2, '0') }}</div>
+            <div class="front-heart">♥</div>
+            <div class="front-tip">点击翻开</div>
+          </div>
+          <div class="card-back" :style="{ background: `linear-gradient(135deg, ${moment.color[0]}, ${moment.color[1]})` }">
+            <p class="back-text">{{ moment.text }}</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="timeline-end">
-      <div class="end-heart">&hearts;</div>
-      <p>未来的每一天，都想和你一起书写...</p>
+    <div class="bottom-area">
+      <button class="flip-all-btn" v-if="!allFlipped" @click="flipAll">全部翻开</button>
+      <div class="ending" v-if="allFlipped">
+        <div class="ending-heart">♥</div>
+        <p>每一个瞬间，都是我喜欢你的理由</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const events = [
-  {
-    date: '2024.01.15',
-    title: '初次相遇',
-    description: '在那个冬日的午后，命运让我们相遇。从第一眼起，你就成了我心中最特别的存在。',
-    image: '/photos/FE3A38DC555AC81FF9217153E6AF4170.jpg',
-  },
-  {
-    date: '2024.02.14',
-    title: '第一次约会',
-    description: '情人节那天，我们一起走过那条长长的街道。你的笑容比任何花束都要美。',
-    image: '/photos/C234806E8AA47D12588B6F3209B5CBEC.jpg',
-  },
-  {
-    date: '2024.04.01',
-    title: '一起看樱花',
-    description: '春天来了，我们并肩站在樱花树下。花瓣落在你的发间，那一刻我觉得整个世界都在微笑。',
-    image: '/photos/5843368A5FAB5119EF6702A1158089FA_0.jpg',
-  },
-  {
-    date: '2024.06.20',
-    title: '夏日旅行',
-    description: '我们一起去了海边。你站在夕阳下，海风吹起你的头发，那画面我永远都忘不了。',
-    image: '/photos/76EB6224B67983026B54FF27A53659FE.jpg',
-  },
-  {
-    date: '2024.09.10',
-    title: '你的生日',
-    description: '为你准备了一整天的惊喜。看到你开心的样子，我觉得所有的努力都值得。',
-    image: '/photos/FDB049E652287FC45BE90F2000894B46.jpg',
-  },
-  {
-    date: '2024.12.25',
-    title: '圣诞节的约定',
-    description: '在飘雪的夜晚，我们许下了一个约定——无论未来如何，都要一直在一起。',
-    image: '/photos/361376B5A660CEDE2C5142410D19F39C.jpg',
-  },
+const moments = [
+  { color: ['#ff6b9d', '#c44569'], text: '你笑起来的样子，眼睛弯成月牙，整个世界都亮了' },
+  { color: ['#a855f7', '#6d28d9'], text: '你认真专注时的眼神，让我看了就移不开' },
+  { color: ['#3b82f6', '#1e40af'], text: '你轻声说晚安的那一刻，我知道今晚会做好梦' },
+  { color: ['#f59e0b', '#b45309'], text: '你不经意说的那句话，我反复回味了好多遍' },
+  { color: ['#ec4899', '#9d174d'], text: '你突然转头看我的瞬间，我的心跳快了一拍' },
+  { color: ['#10b981', '#065f46'], text: '你开心大笑的样子，是我见过最好看的风景' },
+  { color: ['#f97316', '#7c2d12'], text: '你开心的样子，让我觉得做什么都值得' },
+  { color: ['#ff4b8b', '#6b0030'], text: '遇见你这件事，是我最好的运气' },
 ]
 
-const visibleItems = ref(new Set())
+const flippedCards = ref(new Set())
+const visibleCards = ref(new Set())
+
+const allFlipped = computed(() => flippedCards.value.size === moments.length)
+
+function flipCard(index) {
+  const next = new Set(flippedCards.value)
+  if (next.has(index)) {
+    next.delete(index)
+  } else {
+    next.add(index)
+  }
+  flippedCards.value = next
+}
+
+function flipAll() {
+  flippedCards.value = new Set(moments.map((_, i) => i))
+}
 
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const idx = Number(entry.target.getAttribute('data-index'))
-        visibleItems.value = new Set([...visibleItems.value, idx])
+        visibleCards.value = new Set([...visibleCards.value, idx])
         observer.unobserve(entry.target)
       }
     })
-  }, { threshold: 0.2 })
+  }, { threshold: 0.1 })
 
-  document.querySelectorAll('.timeline-item[data-index]').forEach(el => {
+  document.querySelectorAll('.card-wrapper[data-index]').forEach(el => {
     observer.observe(el)
   })
 })
 </script>
 
 <style scoped>
-.timeline-page {
+.moments-page {
   position: relative;
   z-index: 1;
   padding-top: 80px;
   min-height: 100vh;
-  padding-bottom: 4rem;
+  padding-bottom: 5rem;
 }
 
 .page-header {
   text-align: center;
-  padding: 3rem 2rem 4rem;
+  padding: 3rem 2rem 1.5rem;
 }
 
 .page-title {
@@ -123,184 +119,174 @@ onMounted(() => {
   font-size: 1.1rem;
 }
 
-/* Timeline */
-.timeline {
-  position: relative;
-  max-width: 1000px;
+.cards-hint {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  margin-bottom: 3rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, transparent, var(--primary-color), transparent);
-  transform: translateX(-50%);
-}
-
-.timeline-item {
-  position: relative;
-  width: 50%;
-  padding: 0 3rem 4rem;
+/* Entry animation */
+.card-wrapper {
   opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: translateY(24px) scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  perspective: 1000px;
+  cursor: pointer;
+  aspect-ratio: 3 / 4;
 }
 
-.timeline-item.left {
-  left: 0;
-  text-align: right;
-  transform: translateX(-30px);
-}
-
-.timeline-item.right {
-  left: 50%;
-  text-align: left;
-  transform: translateX(30px);
-}
-
-.timeline-item.visible {
+.card-wrapper.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0) scale(1);
 }
 
-.timeline-dot {
+/* 3D flip */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+}
+
+.card-wrapper.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
   position: absolute;
-  top: 5px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--bg-color);
-  border: 2px solid var(--primary-color);
+  inset: 0;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 2;
-  box-shadow: 0 0 15px var(--glow-color);
+  padding: 1.2rem;
 }
 
-.left .timeline-dot {
-  right: -9px;
-}
-
-.right .timeline-dot {
-  left: -9px;
-}
-
-.dot-inner {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.6); }
-}
-
-.timeline-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 1.5rem;
+/* Front */
+.card-front {
+  background: linear-gradient(135deg, rgba(40, 20, 60, 0.9), rgba(25, 15, 45, 0.95));
+  border: 1px solid rgba(255, 75, 139, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  gap: 0.6rem;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.timeline-card:hover {
-  border-color: rgba(255, 75, 139, 0.3);
-  box-shadow: 0 10px 30px rgba(255, 75, 139, 0.15);
+.card-wrapper:hover:not(.flipped) .card-front {
+  border-color: rgba(255, 75, 139, 0.5);
+  box-shadow: 0 12px 32px rgba(255, 75, 139, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.card-date {
+.front-number {
+  font-size: 0.75rem;
+  color: rgba(255, 75, 139, 0.4);
+  letter-spacing: 2px;
+  align-self: flex-start;
+}
+
+.front-heart {
+  font-size: 2.2rem;
   color: var(--primary-color);
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
+  animation: heartbeat 2s infinite;
+  filter: drop-shadow(0 0 8px var(--glow-color));
 }
 
-.card-title {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.6rem;
-  color: #fce4ec;
-  margin-bottom: 0.8rem;
+.front-tip {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.25);
   letter-spacing: 2px;
 }
 
-.card-desc {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
-
-.card-image {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 0.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Timeline End */
-.timeline-end {
+/* Back */
+.card-back {
+  border: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: rotateY(180deg);
   text-align: center;
-  padding: 3rem 2rem;
-  color: rgba(252, 228, 236, 0.6);
+  padding: 1.4rem 1.2rem;
 }
 
-.end-heart {
+.back-text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.9;
+  letter-spacing: 1.5px;
+  font-family: 'Ma Shan Zheng', cursive;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Bottom */
+.bottom-area {
+  text-align: center;
+  margin-top: 3rem;
+  min-height: 60px;
+}
+
+.flip-all-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 75, 139, 0.4);
+  color: var(--primary-color);
+  padding: 0.7rem 2.5rem;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  cursor: pointer;
+  font-family: 'Noto Serif SC', serif;
+  transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.flip-all-btn:hover {
+  background: rgba(255, 75, 139, 0.1);
+  border-color: rgba(255, 75, 139, 0.7);
+  box-shadow: 0 0 20px rgba(255, 75, 139, 0.2);
+}
+
+.ending {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.ending-heart {
   font-size: 2.5rem;
   color: var(--primary-color);
   animation: heartbeat 1.5s infinite;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
-.timeline-end p {
+.ending p {
   font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  color: rgba(252, 228, 236, 0.7);
   letter-spacing: 3px;
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .timeline-line {
-    left: 20px;
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
-
-  .timeline-item {
-    width: 100%;
-    padding: 0 1rem 3rem 3rem;
-    text-align: left;
-  }
-
-  .timeline-item.left,
-  .timeline-item.right {
-    left: 0;
-    text-align: left;
-  }
-
-  .timeline-item.left .timeline-dot,
-  .timeline-item.right .timeline-dot {
-    left: 11px;
-    right: auto;
-  }
-
-  .timeline-item.left {
-    transform: translateY(20px);
-  }
-
-  .timeline-item.right {
-    transform: translateY(20px);
-  }
-
-  .timeline-item.visible {
-    transform: translateY(0);
-  }
-
   .page-title { font-size: 2.5rem; }
+  .back-text { font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>

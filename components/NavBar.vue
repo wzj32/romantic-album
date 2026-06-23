@@ -8,7 +8,7 @@
       <div class="nav-links">
         <NuxtLink to="/" class="nav-link" active-class="active" :class="{ active: $route.path === '/' }">首页</NuxtLink>
         <NuxtLink to="/gallery" class="nav-link" active-class="active">相册</NuxtLink>
-        <NuxtLink to="/timeline" class="nav-link" active-class="active">时光轴</NuxtLink>
+        <NuxtLink to="/timeline" class="nav-link" active-class="active">心动</NuxtLink>
         <NuxtLink to="/letter" class="nav-link" active-class="active">情书</NuxtLink>
       </div>
       <button class="mobile-toggle" @click="mobileOpen = !mobileOpen">
@@ -18,7 +18,7 @@
     <div class="mobile-menu" :class="{ open: mobileOpen }">
       <NuxtLink to="/" class="nav-link" @click="mobileOpen = false">首页</NuxtLink>
       <NuxtLink to="/gallery" class="nav-link" @click="mobileOpen = false">相册</NuxtLink>
-      <NuxtLink to="/timeline" class="nav-link" @click="mobileOpen = false">时光轴</NuxtLink>
+      <NuxtLink to="/timeline" class="nav-link" @click="mobileOpen = false">心动</NuxtLink>
       <NuxtLink to="/letter" class="nav-link" @click="mobileOpen = false">情书</NuxtLink>
     </div>
   </nav>
