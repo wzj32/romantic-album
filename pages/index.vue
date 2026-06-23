@@ -25,7 +25,7 @@
     </section>
 
     <section class="preview-section">
-      <h2 class="section-title">属于我们的瞬间</h2>
+      <h2 class="section-title">那些让我心跳加速的时刻</h2>
       <div class="preview-grid">
         <NuxtLink to="/gallery" class="preview-card" v-for="(photo, i) in previewPhotos" :key="i" :style="{ animationDelay: `${i * 0.15}s` }">
           <img :src="photo.src" :alt="photo.caption" loading="lazy" />
