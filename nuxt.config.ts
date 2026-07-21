@@ -1,5 +1,8 @@
 export default defineNuxtConfig({
   ssr: false,
+  nitro: {
+    preset: 'static'
+  },
   app: {
     head: {
       title: '致最爱的你 - 专属浪漫相册',
